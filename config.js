@@ -11,12 +11,12 @@ const firebaseConfig = {
     projectId: "email-authentication-49dba",
     storageBucket: "email-authentication-49dba.appspot.com",
     messagingSenderId: "830300545623",
-    appId: "1:830300545623:web:e823cfa4f16be446d1f912",
-    measurementId: "G-D5Z3T2ZBR8"
+    appId: "1:830300545623:web:b8be3c981d131198d1f912",
+    measurementId: "G-Q3TQ652WKR"
 };
 
 if(!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
-export { firebase }
+export { firebase };
