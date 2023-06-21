@@ -2,12 +2,16 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-nativ
 import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 
-import {firebase} from '../config'
+import {firebase} from '../../config'
+import { colors } from '../../colors'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Fumi } from 'react-native-textinput-effects';
 
+// link icons: https://fontawesome.com/
 const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); 
 
   loginUser = async (email, password) => {
     try {
@@ -31,13 +35,14 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Login
-      </Text>
-      <View>
-        <TextInput 
-          style={styles.textInput}
-          placeholder="Email"
+      <Text style={styles.title}> Login </Text>
+      <View style={{width: '88%'}}>
+        <Fumi
+          style={styles.input}
+          label={"Email"}
+          iconClass={FontAwesomeIcon}
+          iconName={"envelope"}
+          iconColor={colors.telegram}
           onChangeText={(email) => setEmail(email)}
           autoCapitalize='none'
           autoCorrect={false}
@@ -46,37 +51,41 @@ const Login = () => {
           returnKeyType='next'
           onSubmitEditing={() => ref_input2.current.focus()}
         />
-        <TextInput 
-          style={styles.textInput}
-          placeholder="Password"
-          onChangeText={(password) => setPassword(password)}
+        <Fumi
+          style={styles.input}
+          label={"Password"}
+          iconClass={FontAwesomeIcon}
+          iconName={"lock"}
           autoCapitalize='none'
           autoCorrect={false}
           secureTextEntry={true}
           ref={ref_input2}
+          iconColor={colors.telegram}
+          onChangeText={(password) => setPassword(password)}
         />
+        
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() => (forgetPassword())}>
+          <Text style={styles.forgetPass}>Forget Password</Text>
+        </TouchableOpacity>
       </View>
       <TouchableOpacity 
         style={styles.button} 
         onPress={() => loginUser(email, password)}>
-          <Text style={{fontSize: 22, fontWeight: 'bold'}}>Login</Text>
+          <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         style={{marginTop: 20}} 
         onPress={() => navigation.navigate("Register")}>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Don't have account? Register</Text>
+        <Text style={{fontSize: 18, fontWeight: 'bold'}}>Don't have account? Register</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
-        style={{marginTop: 20}} 
-        onPress={() => (forgetPassword())}>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>Forget Password</Text>
-      </TouchableOpacity>
     </View>
   )
 }
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
@@ -84,28 +93,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 100,
   },
-  textInput: {
-    paddingTop: 20,
-    paddingBottom: 10,
-    width: 400,
-    fontSize: 20,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#000',
-    marginBottom: 10,
-    textAlign: 'center',
+  title: {
+    fontWeight: 'bold',
+    fontSize: 40,
+    color: colors.telegram,
+    marginBottom: 50,
+  },
+  input: {
+    marginTop: 13,
+  },
+  forgetPass: {
+    textAlign: 'right',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
   },
   button: {
     marginTop: 50,
     height: 70,
-    width: 250,
-    backgroundColor: '#026efd',
+    width: '85%',
+    backgroundColor: colors.telegram,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 26,
+  buttonText: {
+    color: colors.white,
+    fontSize: 22,
+    fontWeight: 'bold'
   }
 })

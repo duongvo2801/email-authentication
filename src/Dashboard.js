@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import {firebase} from '../config'
+import { colors } from '../colors';
 
 const Dashboard = () => {
   const [name, setName] = useState('');
@@ -29,13 +30,13 @@ const Dashboard = () => {
 
   return (
       <SafeAreaView style={styles.container}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+        <Text style={styles.title}>
           Hello, {name.firstName}
         </Text>
         <TouchableOpacity
           onPress={() => { changePassword() }}
           style={styles.button}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
+          <Text style={styles.buttonText}>
             Change password
           </Text>
         </TouchableOpacity>
@@ -43,7 +44,7 @@ const Dashboard = () => {
         <TouchableOpacity
           onPress={() => {firebase.auth().signOut()}}
           style={styles.button}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
+          <Text style={styles.buttonText}>
             Sign out
           </Text>
         </TouchableOpacity>
@@ -59,17 +60,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 100,
   },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 40,
+    color: colors.telegram,
+    marginBottom: 50,
+  },
   button: {
     marginTop: 50,
     height: 70,
-    width: 250,
-    backgroundColor: '#026efd',
+    width: '85%',
+    backgroundColor: colors.telegram,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 26,
+  buttonText: {
+    color: colors.white,
+    fontSize: 22,
+    fontWeight: 'bold'
   }
 })
